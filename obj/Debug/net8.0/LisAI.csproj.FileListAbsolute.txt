@@ -12,3 +12,4 @@
 /Users/dev/Projects/LisAI/obj/Debug/net8.0/LisAI.pdb
 /Users/dev/Projects/LisAI/obj/Debug/net8.0/LisAI.genruntimeconfig.cache
 /Users/dev/Projects/LisAI/obj/Debug/net8.0/ref/LisAI.dll
+/Users/dev/Projects/LisAI/obj/Debug/net8.0/LisAI.sourcelink.json
