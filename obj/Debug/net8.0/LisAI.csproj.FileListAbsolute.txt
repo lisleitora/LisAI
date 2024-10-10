@@ -1,0 +1,14 @@
+/Users/dev/Projects/LisAI/bin/Debug/net8.0/LisAI
+/Users/dev/Projects/LisAI/bin/Debug/net8.0/LisAI.deps.json
+/Users/dev/Projects/LisAI/bin/Debug/net8.0/LisAI.runtimeconfig.json
+/Users/dev/Projects/LisAI/bin/Debug/net8.0/LisAI.dll
+/Users/dev/Projects/LisAI/bin/Debug/net8.0/LisAI.pdb
+/Users/dev/Projects/LisAI/obj/Debug/net8.0/LisAI.GeneratedMSBuildEditorConfig.editorconfig
+/Users/dev/Projects/LisAI/obj/Debug/net8.0/LisAI.AssemblyInfoInputs.cache
+/Users/dev/Projects/LisAI/obj/Debug/net8.0/LisAI.AssemblyInfo.cs
+/Users/dev/Projects/LisAI/obj/Debug/net8.0/LisAI.csproj.CoreCompileInputs.cache
+/Users/dev/Projects/LisAI/obj/Debug/net8.0/LisAI.dll
+/Users/dev/Projects/LisAI/obj/Debug/net8.0/refint/LisAI.dll
+/Users/dev/Projects/LisAI/obj/Debug/net8.0/LisAI.pdb
+/Users/dev/Projects/LisAI/obj/Debug/net8.0/LisAI.genruntimeconfig.cache
+/Users/dev/Projects/LisAI/obj/Debug/net8.0/ref/LisAI.dll

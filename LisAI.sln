@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LisAI", "LisAI.csproj", "{63FCB13C-1378-4750-BAC8-F89FE03641BC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63FCB13C-1378-4750-BAC8-F89FE03641BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63FCB13C-1378-4750-BAC8-F89FE03641BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63FCB13C-1378-4750-BAC8-F89FE03641BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63FCB13C-1378-4750-BAC8-F89FE03641BC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {854D7DD8-BEBD-401E-8B4C-C457773F86DD}
+	EndGlobalSection
+EndGlobal
