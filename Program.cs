@@ -2,15 +2,29 @@
 
 //Q1();
 using System.Diagnostics.Metrics;
+
 static int Random(int start = 1, int end = 10)
 {
     Random randNum = new Random();
     return randNum.Next(start, end);
 }
-var trad = new Dictionary<int, string>();
-trad.Add(1, "R");
-trad.Add(2, "P");
-trad.Add(3, "S");
+
+var trad = new List<Trad>();
+trad.Add(new Trad{
+    Id = 1,
+    Code = "R",
+    Name = "Rock"
+});
+trad.Add(new Trad{
+    Id = 2,
+    Code = "P",
+    Name = "Paper"
+});
+trad.Add(new Trad{
+    Id = 3,
+    Code = "S",
+    Name = "Scissors"
+});
 
 Game();
 async void Q1()
@@ -56,14 +70,16 @@ async void Game()
         Console.WriteLine("Rock Paper Scissors game R/P/S");
         string you = Console.ReadLine();
         you = you.ToUpper();
-        var youint = trad.Where(x => x.Value.Equals(you)).First().Key;
-        if (youint > bot || youint== 1&& bot==3){
+        var youint = trad.Where(x => x.Code.Equals(you)).First();
+        var botint = trad.Where(x => x.Id.Equals(bot)).First();
+        Console.WriteLine("You played " + youint.Name + " and bot played " + botint.Name);
+        if ((youint.Id > bot && !(bot==1&&youint.Id==3)) || (youint.Id== 1&& bot==3)){
                         Console.WriteLine("+1 point");
                     ywin++;
-        }else if(bot > youint || bot==1&&youint==3){
+        }if(bot > youint.Id || (bot==1&&youint.Id==3)){
             Console.WriteLine("-1point");
             bwin++;
-        }else if (youint == bot)
+        }else if (youint.Id == bot)
         {
             Console.WriteLine("draw");
             ywin++;
@@ -74,13 +90,18 @@ async void Game()
         {
             if (ywin > bwin)
             {
-                Console.WriteLine("you won");
+                Console.WriteLine("YOU WON! "+bwin+"/"+ywin);
             }
             else
             {
-                Console.WriteLine("bot won hahaha");
+                Console.WriteLine("bot won hahaha "+bwin+"/"+ywin);
             }
             Environment.Exit(0);
         }
     }
 }
+class Trad{
+    public int Id;
+    public string Code;
+    public string Name; 
+};
