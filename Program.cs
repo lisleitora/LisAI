@@ -53,7 +53,7 @@ async void Game()
         Round round = new Round();
         string you = Console.ReadLine();  
         you = you.ToUpper();
-        if (you != "R"|| you != "S"|| you != "P")
+        if (you != "R"&& you != "S"&& you != "P")
         {
             you = "R";
         }
@@ -84,7 +84,7 @@ async void Game()
             bwin++;
         }
         rounds.Add(round);
-        if (counter >= 30)
+        if (counter >= 10)
         {
             if (ywin > bwin)
             {
