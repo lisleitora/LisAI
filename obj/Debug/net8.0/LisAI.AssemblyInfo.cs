@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LisAI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8b3c4ca3d89595f455281dca202a7eb72625d1eb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+89f892b65bbbcdd5fcf58e475086cac8bfbfe5e4")]
 [assembly: System.Reflection.AssemblyProductAttribute("LisAI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LisAI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
