@@ -58,6 +58,7 @@ async void Game()
         if (you != "R" && you != "S" && you != "P")
         {
             you = "R";
+            FunCode(Code.Win);
         }
 
         var youint = trad.Where(x => x.Code.Equals(you)).First();
@@ -72,29 +73,61 @@ async void Game()
             Console.WriteLine("+1 point");
             ywin++;
             round.PlayerWin = true;
+            if (youint.Id == 2 && botint.Id == 1)
+            {
+                FunCode(Code.PxR);
+            }if (youint.Id == 1 && botint.Id == 3)
+            {
+                FunCode(Code.RxS);
+            }if (youint.Id == 3 && botint.Id == 2)
+            {
+                FunCode(Code.SxP);
+            }
         }
         if (bot > youint.Id || (bot == 1 && youint.Id == 3))
         {
             Console.WriteLine("-1point");
             bwin++;
             round.PlayerWin = false;
+            if (youint.Id == 1 && botint.Id == 2)
+            {
+                FunCode(Code.RxP);
+            }if (youint.Id == 3 && botint.Id == 1)
+            {
+                FunCode(Code.SxR);
+            }if (youint.Id == 2 && botint.Id == 3)
+            {
+                FunCode(Code.PxS);
+            }
         }
         else if (youint.Id == bot)
         {
             Console.WriteLine("draw");
             ywin++;
             bwin++;
+            if (youint.Id == 1 && botint.Id == 1)
+            {
+                FunCode(Code.RxR);
+            }if (youint.Id == 3 && botint.Id == 3)
+            {
+                FunCode(Code.SxS);
+            }if (youint.Id == 2 && botint.Id == 2)
+            {
+                FunCode(Code.PxP);
+            }
         }
         rounds.Add(round);
         if (counter >= 10)
         {
             if (ywin > bwin)
             {
-                Console.WriteLine("YOU WON! " + bwin + "/" + ywin);
+                FunCode(Code.Win);
+                Console.WriteLine(ywin + "/" + bwin);
             }
             else
             {
-                Console.WriteLine("bot won hahaha " + bwin + "/" + ywin);
+                FunCode(Code.Lose);
+                Console.WriteLine(ywin + "/" + bwin);
             }
             break;
         }
@@ -149,13 +182,13 @@ async void Game()
         }
         if(i == Code.Win){
             Console.Write(@"
-░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓███████▓▒░  
-░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
-░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
- ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
-   ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
-   ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
-   ░▒▓█▓▒░    ░▒▓██████▓▒░ ░▒▓██████▓▒░        ░▒▓█████████████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░ 
+ ░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓███████▓▒░  
+ ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
+ ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
+  ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
+    ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
+    ░▒▓█▓▒░   ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
+    ░▒▓█▓▒░    ░▒▓██████▓▒░ ░▒▓██████▓▒░        ░▒▓█████████████▓▒░ ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░ 
                                                                                               
                                                                                               
 ");
