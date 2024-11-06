@@ -51,6 +51,9 @@ async void Game()
             bot = Convert(bot);
             //Console.WriteLine("ooooo " + fav.Key + " o " + bot);
         }
+        int pre = PredizerProximaJogada(rounds);
+        if (pre > 0)
+            bot = pre;
 
         Round round = new Round();
         string you = Console.ReadLine();
@@ -58,7 +61,6 @@ async void Game()
         if (you != "R" && you != "S" && you != "P")
         {
             you = "R";
-            FunCode(Code.Win);
         }
 
         var youint = trad.Where(x => x.Code.Equals(you)).First();
@@ -76,10 +78,12 @@ async void Game()
             if (youint.Id == 2 && botint.Id == 1)
             {
                 FunCode(Code.PxR);
-            }if (youint.Id == 1 && botint.Id == 3)
+            }
+            if (youint.Id == 1 && botint.Id == 3)
             {
                 FunCode(Code.RxS);
-            }if (youint.Id == 3 && botint.Id == 2)
+            }
+            if (youint.Id == 3 && botint.Id == 2)
             {
                 FunCode(Code.SxP);
             }
@@ -92,10 +96,12 @@ async void Game()
             if (youint.Id == 1 && botint.Id == 2)
             {
                 FunCode(Code.RxP);
-            }if (youint.Id == 3 && botint.Id == 1)
+            }
+            if (youint.Id == 3 && botint.Id == 1)
             {
                 FunCode(Code.SxR);
-            }if (youint.Id == 2 && botint.Id == 3)
+            }
+            if (youint.Id == 2 && botint.Id == 3)
             {
                 FunCode(Code.PxS);
             }
@@ -108,16 +114,18 @@ async void Game()
             if (youint.Id == 1 && botint.Id == 1)
             {
                 FunCode(Code.RxR);
-            }if (youint.Id == 3 && botint.Id == 3)
+            }
+            if (youint.Id == 3 && botint.Id == 3)
             {
                 FunCode(Code.SxS);
-            }if (youint.Id == 2 && botint.Id == 2)
+            }
+            if (youint.Id == 2 && botint.Id == 2)
             {
                 FunCode(Code.PxP);
             }
         }
         rounds.Add(round);
-        if (counter >= 10)
+        if (counter >= 30)
         {
             if (ywin > bwin)
             {
@@ -135,9 +143,9 @@ async void Game()
 
     foreach (var round in rounds)
     {
-        Console.WriteLine(round.Player);
-        Console.WriteLine(round.Bot);
-        Console.WriteLine(round.PlayerWin);
+        //Console.WriteLine(round.Player);
+        //Console.WriteLine(round.Bot);
+        //Console.WriteLine(round.PlayerWin);
     }
 
     static int Convert(int i)
@@ -157,6 +165,36 @@ async void Game()
         }
         return result;
     }
+
+
+
+    // Método para prever a próxima jogada com base no histórico
+    int PredizerProximaJogada(List<Round> rounds)
+    {
+        if (rounds.Count < 2)
+            return -1; // Não há jogadas suficientes para prever
+
+        // Dicionário que guarda a última jogada seguida de outra jogada
+        var sequencias = new Dictionary<(int, int), int>();
+
+        // Preenche o dicionário com as sequências de jogadas
+        for (int i = 0; i < rounds.Count - 1; i++)
+        {
+            var par = (rounds[i].Player, rounds[i + 1].Player);
+
+            if (sequencias.ContainsKey(par))
+                sequencias[par]++;
+            else
+                sequencias[par] = 1;
+        }
+
+
+        var result = sequencias.Where(x => x.Key.Item1 == rounds.LastOrDefault().Player)
+        .OrderByDescending(x => x.Value)
+        .FirstOrDefault();
+        return Convert(result.Key.Item2);
+    }
+
     static int Random(int start = 1, int end = 10)
     {
         Random randNum = new Random();
@@ -165,7 +203,7 @@ async void Game()
 
     static void FunCode(Code i)
     {
-        if(i == Code.Lose)
+        if (i == Code.Lose)
         {
             Console.Write(@"
 ▓██   ██▓ ▒█████   █    ██     ██▓     ▒█████    ██████ ▄▄▄█████▓
@@ -180,7 +218,8 @@ async void Game()
  ░ ░                                                             
 ");
         }
-        if(i == Code.Win){
+        if (i == Code.Win)
+        {
             Console.Write(@"
  ░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░░▒▓██████▓▒░░▒▓███████▓▒░  
  ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░ 
@@ -193,7 +232,8 @@ async void Game()
                                                                                               
 ");
         }
-        if(i == Code.PxP){
+        if (i == Code.PxP)
+        {
             Console.Write(@"
  _____  _____  _____  _____  _____    __  __    _____  _____  _____  _____  _____ 
 /  _  \/  _  \/  _  \/   __\/  _  \  /  \/  \  /  _  \/  _  \/  _  \/   __\/  _  \
@@ -202,7 +242,8 @@ async void Game()
                                                                                   
 ");
         }
-        if(i == Code.SxS){
+        if (i == Code.SxS)
+        {
             Console.Write(@"
  _____  _____  ___  _____  _____  _____  _____    __  __    _____  _____  ___  _____  _____  _____  _____ 
 /  ___>/     \/___\/  ___>/  ___>/  _  \/  _  \  /  \/  \  /  ___>/     \/___\/  ___>/  ___>/  _  \/  _  \
@@ -210,7 +251,9 @@ async void Game()
 <_____/\_____/\___/<_____/<_____/\_____/\__|\_/  \__/\__/  <_____/\_____/\___/<_____/<_____/\_____/\__|\_/
                                                                                                           
 ");
-        }if(i == Code.RxR){
+        }
+        if (i == Code.RxR)
+        {
             Console.Write(@"
  _____  _____  _____  __ ___   __  __    _____  _____  _____  __ ___
 /  _  \/  _  \/     \|  |  /  /  \/  \  /  _  \/  _  \/     \|  |  /
@@ -218,7 +261,9 @@ async void Game()
 \__|\_/\_____/\_____/|__|__\  \__/\__/  \__|\_/\_____/\_____/|__|__\
                                                                     
 ");
-        }if(i == Code.PxR){
+        }
+        if (i == Code.PxR)
+        {
             Console.Write(@"
  _____  _____  _____  _____  _____    __  __    _____  _____  _____  __ ___
 /  _  \/  _  \/  _  \/   __\/  _  \  /  \/  \  /  _  \/  _  \/     \|  |  /
@@ -226,7 +271,9 @@ async void Game()
 \__/   \__|__/\__/   \_____/\__|\_/  \__/\__/  \__|\_/\_____/\_____/|__|__\
                                                                            
 ");
-        }if(i == Code.PxS){
+        }
+        if (i == Code.PxS)
+        {
             Console.Write(@"
  _____  _____  _____  _____  _____    __  __    _____  _____  ___  _____  _____  _____  _____  _____ 
 /  _  \/  _  \/  _  \/   __\/  _  \  /  \/  \  /  ___>/     \/___\/  ___>/  ___>/  _  \/  _  \/  ___>
@@ -234,7 +281,9 @@ async void Game()
 \__/   \__|__/\__/   \_____/\__|\_/  \__/\__/  <_____/\_____/\___/<_____/<_____/\_____/\__|\_/<_____/
                                                                                                      
 ");
-        }if(i == Code.SxP){
+        }
+        if (i == Code.SxP)
+        {
             Console.Write(@"
  _____  _____  ___  _____  _____  _____  _____  _____    __  __    _____  _____  _____  _____  _____ 
 /  ___>/     \/___\/  ___>/  ___>/  _  \/  _  \/  ___>  /  \/  \  /  _  \/  _  \/  _  \/   __\/  _  \
@@ -242,7 +291,9 @@ async void Game()
 <_____/\_____/\___/<_____/<_____/\_____/\__|\_/<_____/  \__/\__/  \__/   \__|__/\__/   \_____/\__|\_/
                                                                                                      
 ");
-        }if(i == Code.RxP){
+        }
+        if (i == Code.RxP)
+        {
             Console.Write(@"
  _____  _____  _____  __ ___   __  __    _____  _____  _____  _____  _____ 
 /  _  \/  _  \/     \|  |  /  /  \/  \  /  _  \/  _  \/  _  \/   __\/  _  \
@@ -250,7 +301,9 @@ async void Game()
 \__|\_/\_____/\_____/|__|__\  \__/\__/  \__/   \__|__/\__/   \_____/\__|\_/
                                                                            
 ");
-        }if(i == Code.RxS){
+        }
+        if (i == Code.RxS)
+        {
             Console.Write(@"
  _____  _____  _____  __ ___   __  __    _____  _____  ___  _____  _____  _____  _____  _____ 
 /  _  \/  _  \/     \|  |  /  /  \/  \  /  ___>/     \/___\/  ___>/  ___>/  _  \/  _  \/  ___>
@@ -258,7 +311,9 @@ async void Game()
 \__|\_/\_____/\_____/|__|__\  \__/\__/  <_____/\_____/\___/<_____/<_____/\_____/\__|\_/<_____/
                                                                                               
 ");
-        }if(i == Code.SxR){
+        }
+        if (i == Code.SxR)
+        {
             Console.Write(@"
  _____  _____  ___  _____  _____  _____  _____  _____    __  __    _____  _____  _____  __ ___
 /  ___>/     \/___\/  ___>/  ___>/  _  \/  _  \/  ___>  /  \/  \  /  _  \/  _  \/     \|  |  /
@@ -266,7 +321,9 @@ async void Game()
 <_____/\_____/\___/<_____/<_____/\_____/\__|\_/<_____/  \__/\__/  \__|\_/\_____/\_____/|__|__\
                                                                                               
 ");
-        }if(i == Code.Welcome){
+        }
+        if (i == Code.Welcome)
+        {
             Console.Write(@"
 ooooooooo.                         ooooooooo.                          .oooooo..o 
 `888   `Y88.                       `888   `Y88.                       d8P'    `Y8 
